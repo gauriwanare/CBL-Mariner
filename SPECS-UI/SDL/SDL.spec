@@ -106,13 +106,9 @@ BuildRequires:  alsa-lib-devel
 %if %{with arts}
 BuildRequires:  arts-devel
 %endif
-BuildRequires:  coreutils
 %if %{with esound}
 BuildRequires:  esound-devel
 %endif
-BuildRequires:  gcc
-BuildRequires:  glibc-common
-BuildRequires:  make
 %if %{with nas}
 BuildRequires:  nas-devel
 %endif
@@ -120,13 +116,7 @@ BuildRequires:  nas-devel
 BuildRequires:  nasm
 %endif
 BuildRequires:  pulseaudio libpulse-devel
-%if %{with esound}
-BuildRequires:  sed
-%endif
 # Autotools
-BuildRequires:  automake
-BuildRequires:  autoconf
-BuildRequires:  libtool
 
 %description
 Simple DirectMedia Layer (SDL) is a cross-platform multimedia library designed

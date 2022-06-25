@@ -60,7 +60,6 @@ BuildRequires:  perl
 BuildRequires:  perl-generators
 BuildRequires:  perl-File-Find
 
-Requires:       zsh
 Requires:       systemd
 Requires:       shadow-utils
 ## needs the same liborc version which was used to build against
@@ -235,14 +234,6 @@ Group:          System/Shells
 
 %description bash-completion
 Optional dependency offering bash completion for various PulseAudio utilities
-
-%package zsh-completion
-Summary:        PulseAudio zsh completion
-Group:          System/Shells
-Requires:       zsh
-
-%description zsh-completion
-Optional dependency offering zsh completion for various PulseAudio utilities
 
 # %lang_package
 
@@ -593,11 +584,6 @@ exit 0
 %{_bashcompletionsdir}/parec
 %{_bashcompletionsdir}/parecord
 %{_bashcompletionsdir}/pasuspender
-
-%files zsh-completion
-%dir %{_datarootdir}/zsh
-%dir %{_datarootdir}/zsh/site-functions/
-%{_datarootdir}/zsh/site-functions/_pulseaudio
 
 %changelog
 *	Fri Jun 05 2020 Andrew Phelps <anphel@microsoft.com> 12.2-3

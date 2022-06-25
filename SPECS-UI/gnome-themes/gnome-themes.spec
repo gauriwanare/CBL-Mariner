@@ -18,7 +18,7 @@
 
 Name:           gnome-themes
 Version:        3.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        GNOME Themes
 License:        GPL-2.0-or-later
 Group:          System/GUI/GNOME
@@ -56,9 +56,6 @@ make %{?_smp_mflags}
 
 %install
 %make_install
-%if 0%{?suse_version} <= 1120
-rm %{buildroot}%{_datadir}/locale/en@shaw/LC_MESSAGES/*
-%endif
 # remove themes which are now in gnome-themes-standard
 rm -rf %{buildroot}%{_datadir}/themes/{HighContrast,HighContrast-SVG,HighContrastInverse}
 rm -rf %{buildroot}%{_datadir}/icons/{HighContrast,HighContrast-SVG,HighContrastInverse}
@@ -94,9 +91,12 @@ rm -rf %{buildroot}%{_datadir}/icons/{HighContrast,HighContrast-SVG,HighContrast
 %{_datadir}/themes/LowContrastLargePrint/
 %{_datadir}/themes/Mist/
 %{_datadir}/themes/Simple/
-/usr/share/locale
+/usr/locale/*
 
 %changelog
+* Sat Jun 25 2022 mwani@microsoft
+- Fix deletion of LC_MESSAGES
+- Nuke `/usr/share/locale`
 * Thu Sep 16 2021 sbrabec@suse.com
 - Remove obsolete translation-update-upstream support
   (jsc#SLE-21105).

@@ -22,7 +22,6 @@ Distribution:   Mariner
 %global macrosdir %(d=%{_rpmconfigdir}/macros.d; [ -d $d ] || d=%{_sysconfdir}/rpm; echo $d)
 
 
-%bcond_with python2
 %bcond_with ucx
 
 # ARM 32-bit is not supported by rdma
@@ -40,8 +39,6 @@ Summary:         Open Message Passing Interface
 License:         BSD and MIT and Romio
 URL:             http://www.open-mpi.org/
 
-# We can't use %%{name} here because of _cc_name_suffix
-#Source0:         https://www.open-mpi.org/software/ompi/v4.0/downloads/openmpi-%{version}.tar.bz2
 Source0:         https://www.open-mpi.org/software/ompi/v4.0/downloads/openmpi-4.0.3.tar.bz2
 Source1:         openmpi.module.in
 Source2:         openmpi.pth.py2
@@ -148,16 +145,6 @@ Contains development wrapper for compiling Java with openmpi.
 # particular package, version, compiler
 %global namearch openmpi-%{_arch}%{?_cc_name_suffix}
 
-%if %{with python2}
-%package -n python2-openmpi
-Summary:    OpenMPI support for Python 2
-BuildRequires: python2-devel
-Requires:   %{name} = %{version}-%{release}
-Requires:   python2
-
-%description -n python2-openmpi
-OpenMPI support for Python 2.
-%endif
 
 %package -n python%{python3_pkgversion}-openmpi
 Summary:    OpenMPI support for Python 3
@@ -217,11 +204,7 @@ sed 's#@LIBDIR@#%{_libdir}/%{name}#;
      s#@FMODDIR@#%{_fmoddir}/%{name}#;
      s#@INCDIR@#%{_includedir}/%{namearch}#;
      s#@MANDIR@#%{_mandir}/%{namearch}#;
-%if %{with python2}
-     s#@PY2SITEARCH@#%{python2_sitearch}/%{name}#;
-%else
      /@PY2SITEARCH@/d;
-%endif
      s#@PY3SITEARCH@#%{python3_sitearch}/%{name}#;
      s#@COMPILER@#openmpi-%{_arch}%{?_cc_name_suffix}#;
      s#@SUFFIX@#%{?_cc_name_suffix}_openmpi#' \
@@ -250,10 +233,6 @@ sed -i -e s/-ldl// -e s/-lhwloc// \
   %{buildroot}%{_libdir}/%{name}/share/openmpi/*-wrapper-data.txt
 
 # install .pth files
-%if %{with python2}
-mkdir -p %{buildroot}/%{python2_sitearch}/%{name}
-install -pDm0644 %{SOURCE2} %{buildroot}/%{python2_sitearch}/openmpi.pth
-%endif
 mkdir -p %{buildroot}/%{python3_sitearch}/%{name}
 install -pDm0644 %{SOURCE3} %{buildroot}/%{python3_sitearch}/openmpi.pth
 
@@ -348,11 +327,6 @@ make check
 %{_libdir}/%{name}/share/doc/
 %{_mandir}/%{namearch}/man1/mpijavac.1.gz
 
-%if %{with python2}
-%files -n python2-openmpi
-%dir %{python2_sitearch}/%{name}
-%{python2_sitearch}/openmpi.pth
-%endif
 
 %files -n python%{python3_pkgversion}-openmpi
 %dir %{python3_sitearch}/%{name}

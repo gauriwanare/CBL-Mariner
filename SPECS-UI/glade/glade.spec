@@ -14,7 +14,7 @@ BuildRequires:  gobject-introspection-devel libxml2
 BuildRequires:  gtk3 gtk3-immodules gtk3-immodule-xim gtk-doc gtk3-devel glib fontconfig-devel
 BuildRequires:  intltool  libXinerama libpng-devel
 BuildRequires:  pkg-config pango-devel cairo-devel itstool gdk-pixbuf2-devel atk-devel
-BuildRequires:  python2-devel freetype-devel libXdamage-devel at-spi2-atk-devel at-spi2-core-devel
+BuildRequires:  python3-devel freetype-devel libXdamage-devel at-spi2-atk-devel at-spi2-core-devel
 BuildRequires:  perl
 BuildRequires:  perl-generators
 BuildRequires:  perl-File-Find
@@ -69,8 +69,8 @@ applications that want to make use of libgladeui.
 %build
 %configure \
     --disable-static \
-    --enable-gtk-doc \
-    --enable-man-pages
+    --disable-gtk-doc \
+    --disable-man-pages
 %make_build
 
 %install
@@ -95,8 +95,6 @@ find %{buildroot} -type f -name "*.la" -delete -print
 %{_libdir}/glade/modules/libgladegtk.so
 #%{_libdir}/glade/modules/libgladepython.so
 #%{_libdir}/glade/modules/libgladewebkit2gtk.so
-%{_mandir}/man1/glade-previewer.1.gz
-%{_mandir}/man1/glade.1.gz
 %{_datadir}/locale/*
 
 %files -n libgladeui-2-6

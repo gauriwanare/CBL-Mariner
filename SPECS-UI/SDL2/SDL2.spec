@@ -14,7 +14,6 @@ Patch0:         multilib.patch
 # ptrdiff_t is not the same as khronos defines on 32bit arches
 Patch1:         SDL2-2.0.9-khrplatform.patch
 
-BuildRequires:  gcc
 BuildRequires:  alsa-lib-devel
 BuildRequires:  audiofile-devel
 BuildRequires:  libusb-devel

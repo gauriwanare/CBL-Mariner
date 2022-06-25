@@ -513,6 +513,7 @@ export PYTHON=%{_bindir}/python3
 	-Dorc=enabled \
 	-Dexamples=disabled \
 	-Dtremor=disabled \
+	-Dtests=disabled \
 	%{nil}
 %meson_build
 
